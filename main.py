@@ -97,7 +97,7 @@ class DBFCMSchedulerApp:
         self.db_info_label = ttk.Label(db_info_frame, text=info_text, style='Info.TLabel')
         self.db_info_label.pack(pady=(0, 10))
         
-        self.connection_status = ttk.Label(db_info_frame, text="● Disconnected", style='Status.TLabel')
+        self.connection_status = ttk.Label(db_info_frame, text="● Stopped", style='Status.TLabel')
         self.connection_status.pack(pady=(0, 10))
         
     def create_body_frame(self):
@@ -195,10 +195,10 @@ class DBFCMSchedulerApp:
             self.log_message("Starting DB Sync & FCM Scheduler...", "INFO")
             
             if self.test_db_connection():
-                self.connection_status.config(text="● Connected", foreground='#00ff00')
+                self.connection_status.config(text="● Running", foreground='#00ff00')
                 self.log_message("MariaDB connected successfully", "SUCCESS")
             else:
-                self.connection_status.config(text="● Connection Failed", foreground='#ff0000')
+                self.connection_status.config(text="● Stopped", foreground='#ff0000')
                 self.stop_scheduler()
                 return
                 
@@ -212,7 +212,7 @@ class DBFCMSchedulerApp:
             self.is_running = False
             self.start_button.config(state='normal')
             self.stop_button.config(state='disabled')
-            self.connection_status.config(text="● Disconnected", foreground='#ff0000')
+            self.connection_status.config(text="● Stopped", foreground='#ff0000')
             
             self.log_message("Stopping scheduler...", "INFO")
             
