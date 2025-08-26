@@ -19,6 +19,15 @@ class DBFCMSchedulerApp:
         self.root.geometry("800x600")
         self.root.configure(bg='#1a1a1a')
         
+        # 아이콘 설정
+        try:
+            icon_path = os.path.join(os.path.dirname(__file__), 'assets', 'icons', 'KDNAVIEN_icon_v1.2.png')
+            if os.path.exists(icon_path):
+                icon = tk.PhotoImage(file=icon_path)
+                self.root.iconphoto(False, icon)
+        except Exception as e:
+            pass  # 아이콘 로드 실패시 기본 아이콘 사용
+        
         self.root.grid_rowconfigure(1, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
         
